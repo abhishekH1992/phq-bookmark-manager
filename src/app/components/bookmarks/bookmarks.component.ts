@@ -10,10 +10,14 @@ import { Bookmark } from '../../model/bookmark.type';
 export class BookmarksComponent {
     bookmarks = input<Bookmark[]>([]);
     currentPage = signal(1);
-    itemsPerPage = 20;
+    itemsPerPage = 4;
 
     private readonly totalPages = computed(() => 
         Math.ceil(this.bookmarks().length / this.itemsPerPage)
+    );
+
+    readonly pageNumbers = computed(() => 
+        Array.from({ length: this.totalPages() }, (_, i) => i + 1)
     );
 
     private readonly paginatedBookmarks = computed(() => {

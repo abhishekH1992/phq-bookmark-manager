@@ -1,0 +1,36 @@
+<form (ngSubmit)="onSubmit()" class="bookmark-form">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input 
+            type="text" 
+            id="name" 
+            [(ngModel)]="name" 
+            name="name"
+            placeholder="Enter bookmark name"
+            [class.error]="errors().name"
+        >
+        @if (errors().name) {
+            <div class="error-message">{{ errors().name }}</div>
+        }
+    </div>
+
+    <div class="form-group">
+        <label for="url">URL</label>
+        <input 
+            type="text" 
+            id="url" 
+            [(ngModel)]="url" 
+            name="url"
+            placeholder="Enter URL (e.g., https://example.com)"
+            [class.error]="errors().url"
+        >
+        @if (errors().url) {
+            <div class="error-message">{{ errors().url }}</div>
+        }
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" (click)="onCancel()" class="btn btn-secondary">Cancel</button>
+    </div>
+</form>

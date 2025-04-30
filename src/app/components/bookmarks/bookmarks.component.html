@@ -17,11 +17,11 @@
 @if (bookmarks().length) {
     <div class="pagination">
         <button (click)="setPage(currentPage() - 1)" [disabled]="currentPage() === 1">Previous</button>
-    @for (page of [].constructor(getTotalPages()); track $index) {
+    @for (page of pageNumbers(); track page) {
         <button 
-            (click)="setPage($index + 1)"
-            [class.active]="currentPage() === $index + 1">
-                {{ $index + 1 }}
+            (click)="setPage(page)"
+            [class.active]="currentPage() === page">
+                {{ page }}
             </button>
         }
         <button (click)="setPage(currentPage() + 1)" [disabled]="currentPage() === getTotalPages()">Next</button>

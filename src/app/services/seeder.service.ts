@@ -5,7 +5,7 @@ import { Bookmark } from '../model/bookmark.type';
     providedIn: 'root'
 })
 export class SeederService {
-    private readonly STORAGE_KEY = 'bookmarks';
+    private readonly STORAGE_KEY = 'phq-bookmarks';
 
     seedBookmarks(): void {
         const bookmarks: Bookmark[] = [
@@ -51,5 +51,9 @@ export class SeederService {
 
     deleteBookmarks(): void {
         localStorage.removeItem(this.STORAGE_KEY);
+    }
+
+    saveBookmarks(bookmarks: Bookmark[]): void {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(bookmarks));
     }
 } 

@@ -1,8 +1,22 @@
 <div class="card">
     <h1>Overview</h1>
     <div class="overview-actions">
-        <button (click)="seedBookmarks()" class="btn-success">Seed Bookmarks</button>
-        <button (click)="deleteBookmarks()" class="btn-danger">Delete Bookmarks</button>
+        @if (!showAddForm()) {
+            <button (click)="showAddForm.set(true)" class="btn btn-primary">Add Bookmark</button>
+            @if (bookmarks().length === 0) {
+                <button (click)="seedBookmarks()" class="btn btn-success">Seed Bookmarks</button>
+            } @else {
+                <button (click)="deleteBookmarks()" class="btn btn-danger">Delete All</button>
+            }
+        }
     </div>
-    <app-bookmarks [bookmarks]="bookmarks()"></app-bookmarks>
+    @if (showAddForm()) {
+        <app-form 
+            [existingBookmarks]="bookmarks()"
+            (bookmarkAdded)="onBookmarkAdded($event)"
+            (cancel)="showAddForm.set(false)">
+        </app-form>
+    } @else {
+        <app-bookmarks [bookmarks]="bookmarks()"></app-bookmarks>
+    }
 </div>
