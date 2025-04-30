@@ -1,0 +1,29 @@
+<div class="bookmarks">
+    @if (!bookmarks().length) {
+        <div class="no-bookmarks">No bookmarks found</div>
+    } @else {
+        @for (bookmark of getPaginatedBookmarks(); track trackByFn($index, bookmark)) {
+            <div class="item">
+                <div>{{ bookmark.name }} - {{ bookmark.url }}</div>
+            <div class="actions">
+                <div>Edit</div>
+                <div>Delete</div>
+            </div>
+        </div>
+        }
+    }
+</div>
+
+@if (bookmarks().length) {
+    <div class="pagination">
+        <button (click)="setPage(currentPage() - 1)" [disabled]="currentPage() === 1">Previous</button>
+    @for (page of [].constructor(getTotalPages()); track $index) {
+        <button 
+            (click)="setPage($index + 1)"
+            [class.active]="currentPage() === $index + 1">
+                {{ $index + 1 }}
+            </button>
+        }
+        <button (click)="setPage(currentPage() + 1)" [disabled]="currentPage() === getTotalPages()">Next</button>
+    </div>
+}

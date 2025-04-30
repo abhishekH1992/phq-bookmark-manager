@@ -1,0 +1,55 @@
+.bookmarks {
+    display: flex;
+    flex-direction: column;
+}
+
+.bookmarks .no-bookmarks {
+    text-align: center;
+    margin-top: 20px;
+    color: #ccc;
+}
+  
+.bookmarks .item {
+    width: 100%;
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+  
+.bookmarks .item:last-child {
+    border-bottom: none;
+}
+  
+.bookmarks .item .actions {
+    display: flex;
+    gap: 10px;
+}
+  
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+  
+.pagination button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+  
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+  
+.pagination button.active {
+    background: #333;
+    color: #fff;
+}

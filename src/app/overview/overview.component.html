@@ -1,0 +1,8 @@
+<div class="card">
+    <h1>Overview</h1>
+    <div class="overview-actions">
+        <button (click)="seedBookmarks()" class="btn-success">Seed Bookmarks</button>
+        <button (click)="deleteBookmarks()" class="btn-danger">Delete Bookmarks</button>
+    </div>
+    <app-bookmarks [bookmarks]="bookmarks()"></app-bookmarks>
+</div>
