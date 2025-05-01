@@ -3,7 +3,7 @@ services:
     name: phq-bookmark-manager
     env: node
     buildCommand: npm install && npm run build
-    startCommand: npx serve -s dist/phq-bookmark-manager-test/browser
+    startCommand: npx serve -s dist/phq-bookmark-manager-test/browser --config serve.json
     envVars:
       - key: NODE_VERSION
-        value: 22.0.0 
+        value: 18.0.0 
