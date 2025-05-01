@@ -11,7 +11,8 @@ import { Bookmark } from '../../model/bookmark.type';
 })
 export class FormComponent {
     @Input() existingBookmarks: Bookmark[] = [];
-    @Output() bookmarkAdded = new EventEmitter<Bookmark>();
+    @Input() editBookmark: Bookmark | null = null;
+    @Output() bookmarkUpdatedOrAdded = new EventEmitter<Bookmark>();
     @Output() cancel = new EventEmitter<void>();
 
     // Use signals for form state
@@ -31,13 +32,13 @@ export class FormComponent {
     onSubmit(): void {
         if (this.validateForm()) {
             const bookmark: Bookmark = {
-                id: Date.now(),
+                id: this.editBookmark?.id ?? new Date().getTime(),
                 name: this.trimmedName(),
                 url: this.trimmedUrl(),
-                createdAt: new Date(),
+                createdAt: this.editBookmark?.createdAt ?? new Date(),
                 updatedAt: new Date()
             };
-            this.bookmarkAdded.emit(bookmark);
+            this.bookmarkUpdatedOrAdded.emit(bookmark);
             this.resetForm();
             this.cancel.emit();
         }
@@ -46,6 +47,13 @@ export class FormComponent {
     onCancel(): void {
         this.resetForm();
         this.cancel.emit();
+    }
+
+    ngOnInit() {
+        if (this.editBookmark) {
+            this.name.set(this.editBookmark.name);
+            this.url.set(this.editBookmark.url);
+        }
     }
 
     private validateForm(): boolean {
@@ -84,6 +92,7 @@ export class FormComponent {
     private isDuplicateUrl(url: string): boolean {
         const normalizedInputUrl = this.normalizeUrl(url);
         return this.existingBookmarks.some(bookmark => 
+            bookmark.id !== this.editBookmark?.id &&
             this.normalizeUrl(bookmark.url) === normalizedInputUrl
         );
     }

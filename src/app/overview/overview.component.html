@@ -13,10 +13,14 @@
     @if (showAddForm()) {
         <app-form 
             [existingBookmarks]="bookmarks()"
-            (bookmarkAdded)="onBookmarkAdded($event)"
-            (cancel)="showAddForm.set(false)">
+            (bookmarkUpdatedOrAdded)="onBookmarkUpdatedOrAdded($event)"
+            (cancel)="onFormCancel()"
+            [editBookmark]="bookmarkToEdit()">
         </app-form>
     } @else {
-        <app-bookmarks [bookmarks]="bookmarks()"></app-bookmarks>
+        <app-bookmarks 
+            [bookmarks]="bookmarks()"
+            (edit)="onEditBookmark($event)">
+        </app-bookmarks>
     }
 </div>

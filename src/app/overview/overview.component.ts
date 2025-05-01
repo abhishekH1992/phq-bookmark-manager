@@ -13,7 +13,7 @@ import { FormComponent } from '../components/form/form.component';
 export class OverviewComponent implements OnInit {
     bookmarks = signal<Bookmark[]>([]);
     showAddForm = signal(false);
-
+    bookmarkToEdit = signal<Bookmark | null>(null);
     constructor(private seederService: SeederService) {}
 
     ngOnInit(): void {
@@ -35,17 +35,36 @@ export class OverviewComponent implements OnInit {
         this.bookmarks.set([]);
     }
 
-    onBookmarkAdded(bookmark: Bookmark): void {
+    onBookmarkUpdatedOrAdded(bookmark: Bookmark): void {
         const currentBookmarks = this.bookmarks();
-        const urlExists = currentBookmarks.some(b => b.url === bookmark.url);
+        const urlExists = currentBookmarks.some(b => b.id !== bookmark.id && b.url === bookmark.url);
         
         if (urlExists) {
             alert('This URL already exists in your bookmarks!');
             return;
         }
+
+        const isExistingBookmark = currentBookmarks.some(b => b.id === bookmark.id);
+
+        const updatedBookmarks = isExistingBookmark
+            ? currentBookmarks.map(b => b.id === bookmark.id ? bookmark : b)
+            : [...currentBookmarks, bookmark];
         
-        const updatedBookmarks = [...currentBookmarks, bookmark];
         this.seederService.saveBookmarks(updatedBookmarks);
         this.bookmarks.set(updatedBookmarks);
+    }
+
+    onEditBookmark(bookmark: Bookmark) {
+        this.bookmarkToEdit.set(bookmark);
+        this.showAddForm.set(true);
+    }
+
+    onFormCancel() {
+        this.showAddForm.set(false);
+        this.bookmarkToEdit.set(null);
+    }
+
+    trackByFn(index: number, item: Bookmark): number {
+        return item.id;
     }
 }

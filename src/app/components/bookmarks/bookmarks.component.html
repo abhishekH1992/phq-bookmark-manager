@@ -5,11 +5,11 @@
         @for (bookmark of getPaginatedBookmarks(); track trackByFn($index, bookmark)) {
             <div class="item">
                 <div>{{ bookmark.name }} - {{ bookmark.url }}</div>
-            <div class="actions">
-                <div>Edit</div>
-                <div>Delete</div>
+                <div class="actions">
+                    <button (click)="onEditBookmark(bookmark)" class="action-btn">Edit</button>
+                    <button (click)="onDeleteBookmark(bookmark)" class="action-btn">Delete</button>
+                </div>
             </div>
-        </div>
         }
     }
 </div>

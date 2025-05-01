@@ -1,4 +1,4 @@
-import { Component, computed, signal, input } from '@angular/core';
+import { Component, computed, signal, input, Output, EventEmitter } from '@angular/core';
 import { Bookmark } from '../../model/bookmark.type';
 
 @Component({
@@ -10,7 +10,8 @@ import { Bookmark } from '../../model/bookmark.type';
 export class BookmarksComponent {
     bookmarks = input<Bookmark[]>([]);
     currentPage = signal(1);
-    itemsPerPage = 4;
+    itemsPerPage = 20;
+    @Output() edit = new EventEmitter<Bookmark>();
 
     private readonly totalPages = computed(() => 
         Math.ceil(this.bookmarks().length / this.itemsPerPage)
@@ -40,5 +41,13 @@ export class BookmarksComponent {
 
     trackByFn(index: number, item: Bookmark) {
         return item.id;
+    }
+
+    onEditBookmark(bookmark: Bookmark) {
+        this.edit.emit(bookmark);
+    }
+
+    onDeleteBookmark(bookmark: Bookmark) {
+        console.log('Delete bookmark:', bookmark);
     }
 }

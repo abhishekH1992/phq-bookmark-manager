@@ -53,3 +53,9 @@
     background: #333;
     color: #fff;
 }
+
+.action-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
