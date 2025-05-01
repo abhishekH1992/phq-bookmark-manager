@@ -1,7 +1,7 @@
 <div class="overview-actions">
     @if (!showAddForm()) {
         <button (click)="showAddForm.set(true)" class="btn btn-primary">Add Bookmark</button>
-        @if (bookmarks().length === 0) {
+        @if (!bookmarks().length) {
             <button (click)="seedBookmarks()" class="btn btn-success">Seed Bookmarks</button>
         } @else {
             <button (click)="deleteBookmarks()" class="btn btn-danger">Delete All</button>
@@ -16,19 +16,32 @@
         [editBookmark]="bookmarkToEdit()">
     </app-form>
 } @else {
-    <div class="form-group">
-        <input 
-            type="text" 
-            id="search" 
-            [(ngModel)]="searchTerm" 
-            name="search"
-            placeholder="Search bookmarks by name"
-        >
-    </div>
+    @if (bookmarks().length) {
+        <div class="form-group">
+            <input 
+                type="text" 
+                id="search" 
+                [(ngModel)]="searchTerm" 
+                name="search"
+                placeholder="Search bookmarks by name"
+            >
+        </div>
+        <div class="form-group sort-by">
+            <label for="sortBy">Sort By:</label>
+            <select [(ngModel)]="sortBy" name="sortBy" (ngModelChange)="onSortChange($event)">
+                <option value="">Select Sort By</option>
+                <option value="name">Name</option>
+                <option value="url">URL</option>
+                <option value="latest">Latest</option>
+                <option value="lastUpdated">Last Updated</option>
+            </select>
+        </div>
+    }
     <app-bookmarks 
         [bookmarks]="bookmarks()"
         (edit)="onEditBookmark($event)"
         (delete)="onDeleteBookmark($event)"
-        [searchTerm]="searchTerm()">
+        [searchTerm]="searchTerm()"
+        [sortBy]="sortBy()">
     </app-bookmarks>
 }

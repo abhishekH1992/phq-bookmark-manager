@@ -17,7 +17,8 @@ export class OverviewComponent implements OnInit {
     showAddForm = signal(false);
     bookmarkToEdit = signal<Bookmark | null>(null);
     searchTerm = signal('');
-
+    sortBy = signal('');
+    currentPage = signal(1);
     constructor(private seederService: SeederService, private router: Router) {}
 
     ngOnInit(): void {
@@ -78,5 +79,11 @@ export class OverviewComponent implements OnInit {
         const updatedBookmarks = currentBookmarks.filter(b => b.id !== bookmark.id);
         this.seederService.saveBookmarks(updatedBookmarks);
         this.bookmarks.set(updatedBookmarks);
+    }
+
+    onSortChange(value: string) {
+        console.log(value);
+        this.sortBy.set(value);  // Update the signal value
+        this.currentPage.set(1);
     }
 }

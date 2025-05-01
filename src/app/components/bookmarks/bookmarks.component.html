@@ -2,9 +2,13 @@
     @if (!bookmarks().length) {
         <div class="no-bookmarks">No bookmarks found</div>
     } @else {
-        @for (bookmark of getPaginatedBookmarks() | filterSort: searchTerm(); track trackByFn($index, bookmark)) {
+        @for (bookmark of (bookmarks() | filterSort:searchTerm():sortBy()) | slice:(currentPage()-1)*itemsPerPage:currentPage()*itemsPerPage; track trackByFn($index, bookmark)) {
             <div class="item">
-                <div>{{ bookmark.name }} - {{ bookmark.url }}</div>
+                <div>
+                    <div>{{ bookmark.name }} - {{ bookmark.url }}</div>
+                    <span class="date">Created: {{ bookmark.createdAt | date: 'MMM d, yyyy HH:mm' }}</span>
+                    <span class="date">Updated: {{ bookmark.updatedAt | date: 'MMM d, yyyy HH:mm' }}</span>
+                </div>
                 <div class="actions">
                     <button (click)="onEditBookmark(bookmark)" class="action-btn">Edit</button>
                     <button (click)="onDeleteBookmark(bookmark)" class="action-btn">Delete</button>

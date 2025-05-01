@@ -28,6 +28,12 @@
     display: flex;
     gap: 10px;
 }
+
+.bookmarks .item .date {
+    font-size: 12px;
+    color: #666;
+    margin-right: 10px;
+}
   
 .pagination {
     display: flex;

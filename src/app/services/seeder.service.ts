@@ -7,37 +7,23 @@ import { Bookmark } from '../model/bookmark.type';
 export class SeederService {
     private readonly STORAGE_KEY = 'phq-bookmarks';
 
+    private capitalizeFirstLetter(string: string): string {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     seedBookmarks(): void {
-        const bookmarks: Bookmark[] = [
-            {
-                id: 1,
-                name: 'Google',
-                url: 'https://www.google.com',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                id: 2,
-                name: 'Facebook',
-                url: 'https://www.facebook.com',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                id: 3,
-                name: 'Twitter',
-                url: 'https://www.twitter.com',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                id: 4,
-                name: 'Instagram',
-                url: 'https://www.instagram.com',
-                createdAt: new Date(),
-                updatedAt: new Date()
-            }
-        ];
+        const randomString = ['example', 'test', 'sample', 'google', 'instagram', 'facebook', 'twitter', 'linkedin', 'github', 'youtube', 'pinterest', 'vimeo'];
+        const bookmarks: Bookmark[] = Array.from({ length: 45 }, (_, index) => {
+            const randomName = randomString[Math.floor(Math.random() * randomString.length)];
+            return {
+                id: Date.now() + index,
+                name: `${this.capitalizeFirstLetter(randomName)}${index + 1}`,
+                url: `https://${randomName}-${index + 1}.com`,
+                createdAt: new Date(Date.now() - (index * 86400000)),
+                updatedAt: new Date(Date.now() - (index * 43200000))
+            };
+        });
+
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(bookmarks));
     }
 
