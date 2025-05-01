@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Bookmark } from '../../model/bookmark.type';
 import { DatePipe } from '@angular/common';
+import { SeederService } from '../../services/seeder.service';
 
 @Component({
     selector: 'app-result',
@@ -15,8 +16,25 @@ export class ResultComponent {
     bookmark: Bookmark | undefined;
 
     // Constructor
-    constructor(private router: Router) {
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        private seederService: SeederService
+    ) {
+        // Try to get bookmark from navigation state first
         this.bookmark = this.router.getCurrentNavigation()?.extras.state?.['bookmark'];
+        
+        // If not available in state, get from service using ID
+        if (!this.bookmark) {
+            const id = this.route.snapshot.params['id'];
+            const bookmarks = this.seederService.getBookmarks();
+            this.bookmark = bookmarks.find(b => b.id === Number(id));
+            
+            // If bookmark not found, redirect to overview
+            if (!this.bookmark) {
+                this.router.navigate(['/']);
+            }
+        }
     }
 
     // Go back to overview page

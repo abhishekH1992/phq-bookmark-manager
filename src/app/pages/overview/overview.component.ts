@@ -68,8 +68,12 @@ export class OverviewComponent implements OnInit {
         this.seederService.saveBookmarks(updatedBookmarks);
         this.bookmarks.set(updatedBookmarks);
 
-        // Navigate to the result page
-        !isExistingBookmark && this.router.navigate(['/result'], { skipLocationChange: true, state: { bookmark } });
+        if (!isExistingBookmark) {
+            // Navigate to result page with bookmark ID in URL
+            this.router.navigate(['/result', bookmark.id], { 
+                state: { bookmark }
+            });
+        }
     }
 
     // Edit the bookmark

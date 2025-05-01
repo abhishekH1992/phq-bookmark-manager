@@ -10,7 +10,7 @@ export const routes: Routes = [
         data: { title: 'Overview' }
     },
     {
-        path: 'result',
+        path: 'result/:id',
         loadComponent: () => import('./pages/result/result.component').then(m => m.ResultComponent),
         data: { title: 'Result' }
     }

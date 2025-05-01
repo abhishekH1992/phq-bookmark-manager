@@ -1,83 +1,58 @@
-# PhqBookmarkManagerTest
+# Bookmark Manager
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+A web application for managing bookmarks built with Angular 19.
 
-## Development server
+## System Requirements
 
-To start a local development server, run:
+- Node.js version 18.0.0 or higher
+- npm version 9.0.0 or higher
+- Angular CLI version 19.2.9
+- Modern web browser (Chrome, Firefox, Safari, Edge)
 
-```bash
-ng serve
-```
+## Getting Started
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Clone the Repository
 
 ```bash
-ng generate component component-name
+git clone https://github.com/abhishekH1992/phq-bookmark-manager.git
+cd phq-bookmark-manager
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Install Dependencies
 
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building for Production
+### Development Server
 
-To build the project for production, run:
-
+Run the development server:
 ```bash
-ng build --configuration production
+npm start
 ```
+Navigate to `http://localhost:4200` in your browser.
 
-The build artifacts will be stored in the `dist/phq-bookmark-manager-test` directory.
+### Production Build
 
-## Deployment to Render.com
-
-1. Create a new account on [Render.com](https://render.com) if you haven't already.
-
-2. Connect your GitHub repository to Render:
-   - Go to your Render dashboard
-   - Click "New +" and select "Web Service"
-   - Connect your GitHub repository
-   - Select the repository containing this project
-
-3. Configure the deployment:
-   - Name: `phq-bookmark-manager` (or your preferred name)
-   - Environment: `Node`
-   - Build Command: `npm install && npm run build`
-   - Start Command: `npx serve -s dist/phq-bookmark-manager-test`
-   - Node Version: `18.0.0`
-
-4. Click "Create Web Service"
-
-5. Render will automatically:
-   - Clone your repository
-   - Install dependencies
-   - Build the project
-   - Deploy it to their servers
-
-6. Once deployment is complete, Render will provide you with a URL where your application is hosted.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+Build for production:
 ```bash
-ng test
+npm build
 ```
 
-## Running end-to-end tests
+### Running Production Build Locally
 
-For end-to-end (e2e) testing, run:
-
+After building, serve the production build:
 ```bash
-ng e2e
+npx serve -s dist/phq-bookmark-manager-test/browser
 ```
+
+## Live Demo
+
+The application is deployed at [Render](https://phq-bookmark-manager.onrender.com)
+
+## Repository
+
+For more information, visit the [GitHub repository](https://github.com/abhishekH1992/phq-bookmark-manager)
 
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
