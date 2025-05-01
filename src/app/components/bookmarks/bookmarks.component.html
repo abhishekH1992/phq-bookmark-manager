@@ -2,7 +2,7 @@
     @if (!bookmarks().length) {
         <div class="no-bookmarks">No bookmarks found</div>
     } @else {
-        @for (bookmark of getPaginatedBookmarks(); track trackByFn($index, bookmark)) {
+        @for (bookmark of getPaginatedBookmarks() | filterSort: searchTerm(); track trackByFn($index, bookmark)) {
             <div class="item">
                 <div>{{ bookmark.name }} - {{ bookmark.url }}</div>
                 <div class="actions">

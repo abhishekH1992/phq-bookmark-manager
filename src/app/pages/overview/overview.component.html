@@ -16,9 +16,19 @@
         [editBookmark]="bookmarkToEdit()">
     </app-form>
 } @else {
+    <div class="form-group">
+        <input 
+            type="text" 
+            id="search" 
+            [(ngModel)]="searchTerm" 
+            name="search"
+            placeholder="Search bookmarks by name"
+        >
+    </div>
     <app-bookmarks 
         [bookmarks]="bookmarks()"
         (edit)="onEditBookmark($event)"
-        (delete)="onDeleteBookmark($event)">
+        (delete)="onDeleteBookmark($event)"
+        [searchTerm]="searchTerm()">
     </app-bookmarks>
 }

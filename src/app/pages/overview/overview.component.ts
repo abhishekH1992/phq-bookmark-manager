@@ -4,9 +4,11 @@ import { SeederService } from '../../services/seeder.service';
 import { BookmarksComponent } from '../../components/bookmarks/bookmarks.component';
 import { FormComponent } from '../../components/form/form.component';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
 @Component({
     selector: 'app-overview',
-    imports: [BookmarksComponent, FormComponent],
+    imports: [BookmarksComponent, FormComponent, FormsModule],
     templateUrl: './overview.component.html',
     styleUrl: './overview.component.css'
 })
@@ -14,6 +16,8 @@ export class OverviewComponent implements OnInit {
     bookmarks = signal<Bookmark[]>([]);
     showAddForm = signal(false);
     bookmarkToEdit = signal<Bookmark | null>(null);
+    searchTerm = signal('');
+
     constructor(private seederService: SeederService, private router: Router) {}
 
     ngOnInit(): void {
