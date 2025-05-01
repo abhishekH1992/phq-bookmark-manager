@@ -26,15 +26,42 @@ For a complete list of available schematics (such as `components`, `directives`,
 ng generate --help
 ```
 
-## Building
+## Building for Production
 
-To build the project run:
+To build the project for production, run:
 
 ```bash
-ng build
+ng build --configuration production
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The build artifacts will be stored in the `dist/phq-bookmark-manager-test` directory.
+
+## Deployment to Render.com
+
+1. Create a new account on [Render.com](https://render.com) if you haven't already.
+
+2. Connect your GitHub repository to Render:
+   - Go to your Render dashboard
+   - Click "New +" and select "Web Service"
+   - Connect your GitHub repository
+   - Select the repository containing this project
+
+3. Configure the deployment:
+   - Name: `phq-bookmark-manager` (or your preferred name)
+   - Environment: `Node`
+   - Build Command: `npm install && npm run build`
+   - Start Command: `npx serve -s dist/phq-bookmark-manager-test`
+   - Node Version: `18.0.0`
+
+4. Click "Create Web Service"
+
+5. Render will automatically:
+   - Clone your repository
+   - Install dependencies
+   - Build the project
+   - Deploy it to their servers
+
+6. Once deployment is complete, Render will provide you with a URL where your application is hosted.
 
 ## Running unit tests
 
@@ -57,3 +84,7 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Local Storage Note
+
+This application uses browser's localStorage for data persistence. When deployed, each user's browser will maintain their own separate set of bookmarks.
