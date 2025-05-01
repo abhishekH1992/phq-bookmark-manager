@@ -12,11 +12,12 @@ header nav ul {
     gap: 20px;
 }
 
-header nav ul li a {
+header nav ul li span {
     color: #fff;
     text-decoration: none;
+    cursor: pointer;
 }
 
-header nav ul li a:hover {
+header nav ul li span:hover {
     color: #ccc;
 }

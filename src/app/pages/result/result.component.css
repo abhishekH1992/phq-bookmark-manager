@@ -1,0 +1,15 @@
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.success-message h4 {
+    margin: 0 0 10px 0;
+    color: #155724;
+}
+
+.success-message p {
+    margin: 0;
+}

@@ -1,5 +1,14 @@
-<p>Name: {{ bookmark?.name }}</p>
-<p>URL: {{ bookmark?.url }}</p>
-<p>Created at: {{ bookmark?.createdAt | date }}</p>
-<p>Updated at: {{ bookmark?.updatedAt | date }}</p>
+@if (bookmark) {
+    <div class="success-message">
+        <h4>Thank You!</h4>
+        <p>Your bookmark has been successfully added.</p>
+    </div>
+    <p>Name: {{ bookmark.name }}</p>
+    <p>URL: {{ bookmark.url }}</p>
+    <p>Created at: {{ bookmark.createdAt | date: 'MMM d, yyyy HH:mm' }}</p>
+    <p>Updated at: {{ bookmark.updatedAt | date: 'MMM d, yyyy HH:mm' }}</p>
+} @else {
+    <p>No bookmark found</p>
+}
+
 <button (click)="goBack()" class="btn btn-primary">Go Back</button>
