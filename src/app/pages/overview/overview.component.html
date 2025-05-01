@@ -1,0 +1,24 @@
+<div class="overview-actions">
+    @if (!showAddForm()) {
+        <button (click)="showAddForm.set(true)" class="btn btn-primary">Add Bookmark</button>
+        @if (bookmarks().length === 0) {
+            <button (click)="seedBookmarks()" class="btn btn-success">Seed Bookmarks</button>
+        } @else {
+            <button (click)="deleteBookmarks()" class="btn btn-danger">Delete All</button>
+        }
+    }
+</div>
+@if (showAddForm()) {
+    <app-form 
+        [existingBookmarks]="bookmarks()"
+        (bookmarkUpdatedOrAdded)="onBookmarkUpdatedOrAdded($event)"
+        (cancel)="onFormCancel()"
+        [editBookmark]="bookmarkToEdit()">
+    </app-form>
+} @else {
+    <app-bookmarks 
+        [bookmarks]="bookmarks()"
+        (edit)="onEditBookmark($event)"
+        (delete)="onDeleteBookmark($event)">
+    </app-bookmarks>
+}

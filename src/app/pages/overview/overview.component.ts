@@ -1,9 +1,9 @@
 import { Component, signal, OnInit } from '@angular/core';
-import { Bookmark } from '../model/bookmark.type';
-import { SeederService } from '../services/seeder.service';
-import { BookmarksComponent } from '../components/bookmarks/bookmarks.component';
-import { FormComponent } from '../components/form/form.component';
-
+import { Bookmark } from '../../model/bookmark.type';
+import { SeederService } from '../../services/seeder.service';
+import { BookmarksComponent } from '../../components/bookmarks/bookmarks.component';
+import { FormComponent } from '../../components/form/form.component';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-overview',
     imports: [BookmarksComponent, FormComponent],
@@ -14,7 +14,7 @@ export class OverviewComponent implements OnInit {
     bookmarks = signal<Bookmark[]>([]);
     showAddForm = signal(false);
     bookmarkToEdit = signal<Bookmark | null>(null);
-    constructor(private seederService: SeederService) {}
+    constructor(private seederService: SeederService, private router: Router) {}
 
     ngOnInit(): void {
         this.loadBookmarks();
@@ -52,6 +52,7 @@ export class OverviewComponent implements OnInit {
         
         this.seederService.saveBookmarks(updatedBookmarks);
         this.bookmarks.set(updatedBookmarks);
+        !isExistingBookmark && this.router.navigate(['/result'], { skipLocationChange: true, state: { bookmark } });
     }
 
     onEditBookmark(bookmark: Bookmark) {

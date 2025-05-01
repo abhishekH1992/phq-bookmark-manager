@@ -1,0 +1,5 @@
+<p>Name: {{ bookmark?.name }}</p>
+<p>URL: {{ bookmark?.url }}</p>
+<p>Created at: {{ bookmark?.createdAt | date }}</p>
+<p>Updated at: {{ bookmark?.updatedAt | date }}</p>
+<button (click)="goBack()" class="btn btn-primary">Go Back</button>

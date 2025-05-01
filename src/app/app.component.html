@@ -1,4 +1,8 @@
 <app-header></app-header>
 <main>
-    <router-outlet></router-outlet>
+    <div class="card">
+        <router-outlet>
+            <h1>{{ (route.firstChild?.data | async)?.['title'] }}</h1>
+        </router-outlet>
+    </div>
 </main>
