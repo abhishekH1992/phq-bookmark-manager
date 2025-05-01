@@ -20,7 +20,8 @@
     } @else {
         <app-bookmarks 
             [bookmarks]="bookmarks()"
-            (edit)="onEditBookmark($event)">
+            (edit)="onEditBookmark($event)"
+            (delete)="onDeleteBookmark($event)">
         </app-bookmarks>
     }
 </div>

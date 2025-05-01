@@ -67,4 +67,11 @@ export class OverviewComponent implements OnInit {
     trackByFn(index: number, item: Bookmark): number {
         return item.id;
     }
+
+    onDeleteBookmark(bookmark: Bookmark) {
+        const currentBookmarks = this.bookmarks();
+        const updatedBookmarks = currentBookmarks.filter(b => b.id !== bookmark.id);
+        this.seederService.saveBookmarks(updatedBookmarks);
+        this.bookmarks.set(updatedBookmarks);
+    }
 }

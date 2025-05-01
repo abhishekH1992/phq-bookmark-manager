@@ -12,6 +12,7 @@ export class BookmarksComponent {
     currentPage = signal(1);
     itemsPerPage = 20;
     @Output() edit = new EventEmitter<Bookmark>();
+    @Output() delete = new EventEmitter<Bookmark>();
 
     private readonly totalPages = computed(() => 
         Math.ceil(this.bookmarks().length / this.itemsPerPage)
@@ -48,6 +49,6 @@ export class BookmarksComponent {
     }
 
     onDeleteBookmark(bookmark: Bookmark) {
-        console.log('Delete bookmark:', bookmark);
+        this.delete.emit(bookmark);
     }
 }
