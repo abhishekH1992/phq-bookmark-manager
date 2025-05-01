@@ -29,6 +29,7 @@ export class FormComponent {
     private readonly URL_PATTERN = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
     private readonly VALID_CHARS_PATTERN = /^[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=]+$/;
 
+    // Submit the form
     onSubmit(): void {
         if (this.validateForm()) {
             const bookmark: Bookmark = {
@@ -44,11 +45,13 @@ export class FormComponent {
         }
     }
 
+    // Cancel the form
     onCancel(): void {
         this.resetForm();
         this.cancel.emit();
     }
 
+    // Initialize the component
     ngOnInit() {
         if (this.editBookmark) {
             this.name.set(this.editBookmark.name);
@@ -56,6 +59,7 @@ export class FormComponent {
         }
     }
 
+    // Validate the form
     private validateForm(): boolean {
         const newErrors: { name?: string; url?: string } = {};
 
@@ -77,6 +81,7 @@ export class FormComponent {
         return !this.hasErrors();
     }
 
+    // Validate the URL
     private isValidUrl(url: string): boolean {
         if (!this.URL_PATTERN.test(url)) {
             return false;
@@ -89,6 +94,7 @@ export class FormComponent {
         );
     }
 
+    // Check if the URL is duplicate
     private isDuplicateUrl(url: string): boolean {
         const normalizedInputUrl = this.normalizeUrl(url);
         return this.existingBookmarks.some(bookmark => 
@@ -97,6 +103,7 @@ export class FormComponent {
         );
     }
 
+    // Normalize the URL
     private normalizeUrl(url: string): string {
         // Convert to lowercase and remove trailing slashes
         let normalized = url.toLowerCase().replace(/\/+$/, '');
@@ -110,6 +117,7 @@ export class FormComponent {
         return normalized;
     }
 
+    // Reset the form
     private resetForm(): void {
         this.name.set('');
         this.url.set('');

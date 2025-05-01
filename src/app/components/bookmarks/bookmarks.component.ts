@@ -41,20 +41,24 @@ export class BookmarksComponent {
         Array.from({ length: this.getTotalPages() }, (_, i) => i + 1)
     );
 
+    // Set the page
     setPage(page: number) {
         if (page >= 1 && page <= this.getTotalPages()) {
             this.currentPage.set(page);
         }
     }
 
+    // Track the bookmarks
     trackByFn(index: number, item: Bookmark) {
         return item.id;
     }
 
+    // Edit the bookmark
     onEditBookmark(bookmark: Bookmark) {
         this.edit.emit(bookmark);
     }
 
+    // Delete the bookmark
     onDeleteBookmark(bookmark: Bookmark) {
         this.delete.emit(bookmark);
     }

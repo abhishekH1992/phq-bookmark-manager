@@ -5,12 +5,15 @@ import { Bookmark } from '../model/bookmark.type';
     providedIn: 'root'
 })
 export class SeederService {
+    // Storage key for bookmarks
     private readonly STORAGE_KEY = 'phq-bookmarks';
 
+    // Capitalize the first letter of a string
     private capitalizeFirstLetter(string: string): string {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    // Seed bookmarks
     seedBookmarks(): void {
         const randomString = ['example', 'test', 'sample', 'google', 'instagram', 'facebook', 'twitter', 'linkedin', 'github', 'youtube', 'pinterest', 'vimeo'];
         const bookmarks: Bookmark[] = Array.from({ length: 45 }, (_, index) => {
@@ -27,6 +30,7 @@ export class SeederService {
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(bookmarks));
     }
 
+    // Get bookmarks
     getBookmarks(): Bookmark[] {
         const stored = localStorage.getItem(this.STORAGE_KEY);
         if (stored) {
@@ -35,10 +39,12 @@ export class SeederService {
         return [];
     }
 
+    // Delete bookmarks
     deleteBookmarks(): void {
         localStorage.removeItem(this.STORAGE_KEY);
     }
 
+    // Save bookmarks
     saveBookmarks(bookmarks: Bookmark[]): void {
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(bookmarks));
     }

@@ -12,5 +12,6 @@ import { AsyncPipe } from '@angular/common';
 export class AppComponent {
     title = 'phq-bookmark-manager-test';
 
+    // Get the current route
     constructor(public route: ActivatedRoute) {}
 }
